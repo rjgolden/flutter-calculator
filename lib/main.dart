@@ -50,6 +50,20 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
         } catch (e) {
           _result = ' Error';
         }
+      } else if (value == '^2') {
+        try {
+          final expression = Expression.parse(_expression);
+          final evaluator = const ExpressionEvaluator();
+          final result = evaluator.eval(expression, {});
+
+          if (result is num) {
+            _result = ' = ${result * result}';
+          } else {
+            _result = ' Error';
+          }
+        } catch (e) {
+          _result = ' Error';
+        }
       } else {
         _expression += value;
       }
@@ -117,6 +131,11 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                   _buildButton('C'),
                   _buildButton('='),
                   _buildButton('+'),
+                ],
+              ),
+              Row(
+                children: [
+                  _buildButton('^2'),
                 ],
               ),
             ],
